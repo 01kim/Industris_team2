@@ -113,7 +113,7 @@ void PlayerTemplate::Update()
 }
 void PlayerTemplate::Draw()
 {
-	switch (modelState)
+	/*switch (modelState)
 	{
 	case PlayerTemplate::WAIT:
 		pWait->Preparation(ShaderSystem::GetInstance()->GetShaderOfSkinnedMesh(ShaderSystem::DEFAULT), false);
@@ -131,7 +131,7 @@ void PlayerTemplate::Draw()
 			DirectX::XMFLOAT4(0.0f, -1.0f, 1.0f, 0.0f), modelData.GetColor(), FrameWork::GetInstance().GetElapsedTime());
 		break;
 	default: break;
-	}
+	}*/
 
 	pItem->Preparation(ShaderSystem::GetInstance()->GetShaderOfSkinnedMesh(ShaderSystem::DEFAULT), false);
 	pItem->Render(itemData.GetWorldMatrix(), CameraSystem::GetInstance()->mainView.GetViewMatrix(), CameraSystem::GetInstance()->mainView.GetProjectionMatrix(),
