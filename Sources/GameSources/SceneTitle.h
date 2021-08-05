@@ -21,7 +21,6 @@ private:
 	// プレイヤーモデル描画用
 	std::unique_ptr<Model> playerModel;
 	OBJ3D playerModelData;
-
 public:
 	void Init();
 	void UnInit();

@@ -5,7 +5,7 @@
 #include "InputDevice.h"
 #include "SoundLoader.h"
 #include "CameraSystem.h"
-
+#include "SceneGame.h"
 
 void SceneTitle::Init()
 {
@@ -46,8 +46,9 @@ void SceneTitle::Update()
 	{
 		Fade::GetInstance()->onFadeFlg = true;
 		Fade::GetInstance()->loading = true;
-		//Fade::GetInstance()->SetNextScene(new SceneGame()); // TODO : 次のシーンを追加
+		Fade::GetInstance()->SetNextScene(new SceneGame()); // TODO : 次のシーンを追加
 	}
+
 }
 
 void SceneTitle::Render()
@@ -62,9 +63,9 @@ void SceneTitle::Render()
 
 	// モデルの描画
 	{
-		playerModel->Preparation(ShaderSystem::GetInstance()->GetShaderOfSkinnedMesh(ShaderSystem::DEFAULT), false);
-		playerModel->Render(playerModelData.GetWorldMatrix(), CameraSystem::GetInstance()->mainView.GetViewMatrix(), CameraSystem::GetInstance()->mainView.GetProjectionMatrix(),
-			DirectX::XMFLOAT4(0.0f, -1.0f, 1.0f, 0.0f), playerModelData.GetColor(), FrameWork::GetInstance().GetElapsedTime());
+		//playerModel->Preparation(ShaderSystem::GetInstance()->GetShaderOfSkinnedMesh(ShaderSystem::DEFAULT), false);
+		//playerModel->Render(playerModelData.GetWorldMatrix(), CameraSystem::GetInstance()->mainView.GetViewMatrix(), CameraSystem::GetInstance()->mainView.GetProjectionMatrix(),
+		//	DirectX::XMFLOAT4(0.0f, -1.0f, 1.0f, 0.0f), playerModelData.GetColor(), FrameWork::GetInstance().GetElapsedTime());
 	}
 }
 
