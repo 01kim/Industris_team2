@@ -45,11 +45,12 @@ void SceneGame::Update()
 {
 	if (Fade::GetInstance()->loading) return;
 
-	if (xInput[0].bAt || xInput[0].bBt || xInput[0].bXt || xInput[0].bYt)
+	/*if (xInput[0].bAt || xInput[0].bBt || xInput[0].bXt || xInput[0].bYt)
 	{
 		Fade::GetInstance()->onFadeFlg = true;
 		Fade::GetInstance()->loading = true;
-	}
+	}*/
+	
 }
 
 void SceneGame::Render()
@@ -67,10 +68,10 @@ void SceneGame::Render()
 		playerModel->Preparation(ShaderSystem::GetInstance()->GetShaderOfSkinnedMesh(ShaderSystem::DEFAULT), false);
 		playerModel->Render(playerModelData.GetWorldMatrix(), CameraSystem::GetInstance()->mainView.GetViewMatrix(), CameraSystem::GetInstance()->mainView.GetProjectionMatrix(),
 			DirectX::XMFLOAT4(0.0f, -1.0f, 1.0f, 0.0f), playerModelData.GetColor(), FrameWork::GetInstance().GetElapsedTime());
-
 		stageModel->Preparation(ShaderSystem::GetInstance()->GetShaderOfSkinnedMesh(ShaderSystem::DEFAULT), false);
 		stageModel->Render(stageModelData.GetWorldMatrix(), CameraSystem::GetInstance()->mainView.GetViewMatrix(), CameraSystem::GetInstance()->mainView.GetProjectionMatrix(),
 			DirectX::XMFLOAT4(0.0f, -1.0f, 1.0f, 0.0f), stageModelData.GetColor(), FrameWork::GetInstance().GetElapsedTime());
+
 	}
 }
 

@@ -9,7 +9,6 @@
 #include "Sprite.h"
 #include "Model.h"
 
-
 class SceneGame : public Scene
 {
 private:
@@ -23,11 +22,10 @@ private:
 	OBJ3D playerModelData;
 	OBJ3D stageModelData;
 
-#if DEBUG_MODE
 	DirectX::XMFLOAT3 stagePos = stageModelData.GetPos();
 	DirectX::XMFLOAT3 stageScale = stageModelData.GetScale();
 	DirectX::XMFLOAT3 stageAngle = stageModelData.GetAngle();
-#endif //DEBUG_MODE
+
 public:
 	void Init();
 	void UnInit();

@@ -6,6 +6,7 @@
 #include "SoundLoader.h"
 #include "CameraSystem.h"
 #include "SceneGame.h"
+#include "Input.h"
 
 void SceneTitle::Init()
 {
@@ -19,11 +20,11 @@ void SceneTitle::Init()
 	}
 
 	// モデルの初期化
-	playerModel = std::make_unique<Model>("Data/Assets/Model/Player/Test/Mma_Kick.fbx", false);
-	{
-		playerModel->StartAnimation(1, true); // 引数 : FBX内のアニメーション番号, ループ再生するか？
-		playerModelData.Init();
-	}
+	//playerModel = std::make_unique<Model>("Data/Assets/Model/Player/Test/Mma_Kick.fbx", false);
+	//{
+	//	playerModel->StartAnimation(1, true); // 引数 : FBX内のアニメーション番号, ループ再生するか？
+	//	playerModelData.Init();
+	//}
 
 	// すべてのサウンドを停止
 	{
@@ -41,8 +42,9 @@ void SceneTitle::Init()
 void SceneTitle::Update()
 {
 	if (Fade::GetInstance()->loading) return;
-
-	if (xInput[0].bAt || xInput[0].bBt || xInput[0].bXt || xInput[0].bYt)
+	Input& input = Input::getInstanse();
+	input.Update();
+	if (input.GetButtonDown() & input.button.BTN_A)
 	{
 		Fade::GetInstance()->onFadeFlg = true;
 		Fade::GetInstance()->loading = true;
