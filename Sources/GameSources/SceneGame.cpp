@@ -6,6 +6,8 @@
 #include "SoundLoader.h"
 #include "CameraSystem.h"
 
+#include "EnemyManager.h"
+
 
 void SceneGame::Init()
 {
@@ -28,6 +30,12 @@ void SceneGame::Init()
 	{
 		stageModelData.Init();
 	}
+
+	//エネミーの追加
+	{
+		EnemyManager::Instance().Register(DirectX::XMFLOAT3{ 1.0f, 0.0f, 0.0f });
+	}
+
 	// すべてのサウンドを停止
 	{
 		AllSoundStop();
@@ -51,6 +59,7 @@ void SceneGame::Update()
 		Fade::GetInstance()->loading = true;
 	}*/
 	
+	EnemyManager::Instance().Update();
 }
 
 void SceneGame::Render()
@@ -72,6 +81,7 @@ void SceneGame::Render()
 		stageModel->Render(stageModelData.GetWorldMatrix(), CameraSystem::GetInstance()->mainView.GetViewMatrix(), CameraSystem::GetInstance()->mainView.GetProjectionMatrix(),
 			DirectX::XMFLOAT4(0.0f, -1.0f, 1.0f, 0.0f), stageModelData.GetColor(), FrameWork::GetInstance().GetElapsedTime());
 
+		EnemyManager::Instance().Render();
 	}
 }
 

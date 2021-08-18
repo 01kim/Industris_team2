@@ -6,12 +6,13 @@
 Enemy::Enemy()
 {
 	Init();
+	model = std::make_unique<Model>("Data/Assets/Model/Enemy/Enemy.fbx", false);
 }
 
 
 void Enemy::Update()
 {
-
+	Move();
 }
 
 
