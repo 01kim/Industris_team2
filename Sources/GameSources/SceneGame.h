@@ -9,6 +9,10 @@
 #include "Sprite.h"
 #include "Model.h"
 
+//í«â¡
+#include "Collision.h"
+#include "Ball.h"
+
 class SceneGame : public Scene
 {
 private:
@@ -25,6 +29,12 @@ private:
 	DirectX::XMFLOAT3 stagePos = stageModelData.GetPos();
 	DirectX::XMFLOAT3 stageScale = stageModelData.GetScale();
 	DirectX::XMFLOAT3 stageAngle = stageModelData.GetAngle();
+
+	//è’ìÀëŒè€
+	std::unique_ptr<CollisionPrimitive> collisionModel;
+	DirectX::XMFLOAT3 collisionPos = {};
+	DirectX::XMFLOAT3 collisionScale = {};
+
 
 public:
 	void Init();

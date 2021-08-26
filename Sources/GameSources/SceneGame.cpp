@@ -8,6 +8,7 @@
 
 #include "EnemyManager.h"
 
+#include "Score.h"
 
 void SceneGame::Init()
 {
@@ -47,6 +48,14 @@ void SceneGame::Init()
 		//PlaySoundMem(SoundLoader::GetInstance()->bgm.get()); // ループ再生
 		//PlaySoundMem(SoundLoader::GetInstance()->se.get()); // 単発再生
 	}
+
+	//弾と衝突対象の追加
+	{
+		//衝突対象
+		collisionScale = { 100.0f,100.0f,100.0f };
+		collisionModel = std::make_unique<CollisionPrimitive>(1, true, collisionScale);
+		collisionModel->SetColor(DirectX::XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f));
+	}
 }
 
 void SceneGame::Update()
@@ -58,8 +67,15 @@ void SceneGame::Update()
 		Fade::GetInstance()->onFadeFlg = true;
 		Fade::GetInstance()->loading = true;
 	}*/
-	
 	EnemyManager::Instance().Update();
+
+	//玉の更新
+	{
+		//玉の更新
+		Ball::Instance().Update();
+		//衝突対象と当たっているか
+		Ball::Instance().judgeBallvsEnemy(collisionPos, collisionScale.x);
+	}
 }
 
 void SceneGame::Render()
@@ -83,6 +99,15 @@ void SceneGame::Render()
 
 		EnemyManager::Instance().Render();
 	}
+
+	//玉の描画
+	{
+		//玉
+		Ball::Instance().Render();
+		//衝突対象
+		collisionModel->Render(CameraSystem::GetInstance()->mainView.GetViewMatrix(), CameraSystem::GetInstance()->mainView.GetProjectionMatrix(),
+			DirectX::XMFLOAT4(0.0f, -1.0f, 1.0f, 0.0f), FrameWork::GetInstance().GetElapsedTime());
+	}
 }
 
 void SceneGame::ImGui()
@@ -96,6 +121,28 @@ void SceneGame::ImGui()
 	ImGui::InputFloat3("Angle", &stageAngle.x);
 	stageModelData.SetAngle(stageAngle);
 	ImGui::End();
+
+	//玉
+	{
+		Ball::Instance().DebugImgui();
+		//衝突対象
+		ImGui::Begin("collision");
+		ImGui::DragFloat3("Position", &collisionPos.x);
+		collisionModel->SetPos(collisionPos);
+		ImGui::DragFloat3("Scale", &collisionScale.x);
+		collisionModel->SetScale(collisionScale);
+		ImGui::End();
+	}
+
+	//スコア
+	{
+		ImGui::Begin("score");
+
+		int s = ScoreManager::Instance().getScore();
+		ImGui::InputInt("score", &s);
+		ScoreManager::Instance().setScore(s);
+		ImGui::End();
+	}
 }
 
 void SceneGame::UnInit()
