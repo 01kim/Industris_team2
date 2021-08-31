@@ -6,6 +6,7 @@
 #include "SoundLoader.h"
 #include "CameraSystem.h"
 #include "SceneGame.h"
+#include "Loading.h"
 #include "Input.h"
 
 void SceneTitle::Init()
@@ -48,7 +49,7 @@ void SceneTitle::Update()
 	{
 		Fade::GetInstance()->onFadeFlg = true;
 		Fade::GetInstance()->loading = true;
-		Fade::GetInstance()->SetNextScene(new SceneGame()); // TODO : 次のシーンを追加
+		Fade::GetInstance()->SetNextScene(new Loading(new SceneGame)); // TODO : 次のシーンを追加
 	}
 
 }

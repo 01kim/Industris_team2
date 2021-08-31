@@ -114,6 +114,11 @@ void SceneManager::SetScene(Scene* scene, bool nowSceneStack)
 	{
 		pStackScene = nullptr;
 	}
+	// –¢‰Šú‰»‚Ìê‡‚Í‰Šú‰»ˆ—
+	if (!scene->IsReady())
+	{
+		scene->Init();
+	}
 	if (nowSceneStack)
 	{
 		pStackScene = pScene;

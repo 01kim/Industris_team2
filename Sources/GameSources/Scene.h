@@ -12,9 +12,14 @@ class Scene
 private:
 
 public:
-	virtual void Init() {}
-	virtual void UnInit() {}
-	virtual void Update() {}
-	virtual void Render() {}
-	virtual void ImGui() {}
+	virtual void Init() = 0;
+	virtual void UnInit() = 0;
+	virtual void Update() = 0;
+	virtual void Render() = 0;
+	virtual void ImGui() = 0;
+
+	bool IsReady() const { return ready; }
+	void SetReady() { ready = true; }
+private:
+	bool ready = false;
 };
